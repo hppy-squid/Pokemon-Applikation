@@ -1,7 +1,7 @@
 # Pokemon-Applikation
 Inlämningsuppgift - pokemon applikation med externt API
 
-Detta är en frontend-applikation byggd med Vite + JavaScript som kommunicerar med två APIer, ett externt API där det hämtas data om pokemons och ett REST API som är byggd med Spring Boot och använder Fetch API för att göra HTTP-anrop för att hantera en lista(pokedex) av Pokémon. 
+Detta är en frontend-applikation byggd med Vite + JavaScript som kommunicerar med två APIer, ett externt API där det hämtas data om pokemons och ett REST API som är byggd med Spring Boot och hanterar en lista av Pokémon. 
 
 Användaren kan:
 
@@ -21,14 +21,12 @@ Istallation och konfiguration:
 
  git clone (https) https://github.com/hppy-squid/Pokemon-Applikation.git
 
- cd pokemon-applikation
-
 
 Installera beroenden:
 
  npm install
 
-Starta utvecklingsservern:
+Starta servern:
 
  npm run dev
 
