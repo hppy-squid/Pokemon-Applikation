@@ -17,20 +17,28 @@ header {
   font-weight: bold;
 }
 button[type="submit"] {
+  
   font-weight: bold;
+  cursor: pointer;
 }
 .card {
-  background-color: cadetblue;
-  display: flex;
+  background-color: rgba(13, 210, 217, 0.695);
+  display: none;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin: 20px auto;
+  max-width: 300px;
+  transition: transform 0.3s ease;
 }
-/* .pokemon-image {
-  width: 200px;
-  height: 200px;
-} */
  .catchBtn {
   display: none;
+  background-color: rgb(77, 132, 132);
+  font-weight: bold;
+  cursor: pointer;
+
  }
  .pokedex-container{
   display: flex;
