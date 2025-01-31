@@ -7,11 +7,8 @@ const pokedexContainer = document.querySelector(".pokedex-container") || documen
     pokedexContainer.classList.add("pokedex-container");
     document.body.appendChild(pokedexContainer);
   }
-
-console.log("Form:", document.querySelector(".pokeForm"));
-console.log("Name Input:", document.querySelector(".nameInput"));
-console.log("Card:", document.querySelector(".card"));
-
+ 
+//sök efter pokemon
 pokeForm.addEventListener("submit", async event => {
 
   event.preventDefault();
@@ -31,6 +28,8 @@ pokeForm.addEventListener("submit", async event => {
       displayError("Felaktig inmatning");
     }
   });
+
+  //Hämta pokemondata
 async function getPokemonData(pokemonName) {
 
   try{
@@ -50,6 +49,7 @@ async function getPokemonData(pokemonName) {
   
 }
 
+//Vad som ska visas på sidan
 function displayPokemonData(data){
     
    const {name: pokemonName, sprites: {front_default: imgUrl}} = data;
@@ -58,21 +58,21 @@ function displayPokemonData(data){
     card.textContent = "";
     card.style.display = "flex";
 
+    //namn element
     const nameDisplay = document.createElement("h1");
     nameDisplay.textContent = pokemonName;
     card.appendChild(nameDisplay);
 
-    
+    //bild element
     const imgElement = document.createElement("img");
-    imgElement.src = imgUrl; // Hämta bildens URL
+    imgElement.src = imgUrl; 
     imgElement.alt = `${data.pokemonName} sprite`;
-    imgElement.style.display = "block"; // Visa bilden
-
-    // Lägg till bilden i kortet
+    imgElement.style.display = "block"; 
     card.appendChild(imgElement);
 
+    //spara pokemon knapp
     const catchBtn = document.createElement("button");
-    catchBtn.textContent = "Lägg till i Pokedex";
+    catchBtn.textContent = "Spara till ditt Pokédex";
     catchBtn.classList.add("catchBtn"); // Lägg till klass
     catchBtn.style.display = "block"; // Se till att den syns
    card.appendChild(catchBtn);
@@ -89,6 +89,7 @@ function displayPokemonData(data){
 
     document.addEventListener("DOMContentLoaded", getPokedex);
 
+    //spara pokemon till databas 
     async function addPokemonToPokedex(pokemonName, imgUrl) {
       const response = await fetch("http://localhost:8080/api/pokemon", {
           method: "POST",
@@ -101,22 +102,23 @@ function displayPokemonData(data){
       if (!response.ok) {
           console.error("Fel vid sparning av Pokémon");
       } else {
-        console.log("Pokémon added to Pokedex successfully");
-        // Optionally, you can refresh the Pokedex display here
+        console.log("Pokémon sparad");
+      
         getPokedex();
     }
   }
+  
+    //lista ut pokemons
   async function getPokedex() {
     const response = await fetch("http://localhost:8080/api/pokemon");
     const pokemonList = await response.json();
 
-    // Rendera Pokémon i frontend
     console.log(pokemonList);
 
     pokedexContainer.innerHTML = "";
 
     const heading = document.createElement("h2");
-    heading.textContent = "My Pokedex";
+    heading.textContent = "Mitt Pokedéx";
     pokedexContainer.appendChild(heading);
 
     const list = document.createElement("ul");
@@ -155,19 +157,22 @@ function displayPokemonData(data){
   pokedexContainer.appendChild(list);
 
 }
+
+  //ta bort pokemon från databas
 async function deletePokemonFromPokedex(pokemonId) {
   const response = await fetch(`http://localhost:8080/api/pokemon/${pokemonId}`, {
       method: "DELETE",
   });
 
   if (!response.ok) {
-      console.error("Failed to delete Pokémon");
+      console.error("kunde inte radera Pokémon");
   } else {
-      console.log("Pokémon deleted successfully");
-      getPokedex(); // Refresh the Pokedex display
+      console.log("Pokémon borttagen");
+      getPokedex(); 
   }
 }
 
+  //visa felmeddelande
   function displayError(message) {
     const errorDisplay = document.createElement("p");
     errorDisplay.textContent = message;
@@ -178,4 +183,3 @@ async function deletePokemonFromPokedex(pokemonId) {
     card.appendChild(errorDisplay);
   }
 
-// const logo = document.createElement('img')
